@@ -10,24 +10,23 @@
         ></VueDatePicker> -->
       </div>
       <div class="call-outs">
-      <h3>Call Outs:</h3>
-      <ul>
-        <li v-for="(entry, index) in entries" :key="index">
-          <span v-if="Array.isArray(entry.callOut) && entry.callOut.length > 0">
-            <!-- <strong>{{ entry.name }}:</strong> -->
-            <ul>
-              <li v-for="(callOutItem, callOutIndex) in entry.callOut" :key="callOutIndex">
-                {{ callOutItem }}
-              </li>
-            </ul>
-          </span>
-          <span v-else-if="entry.callOut">
-            <!-- <strong>{{ entry.name }}:</strong>  -->
-            {{ entry.callOut }}
-          </span>
-        </li>
-      </ul>
-    </div>
+        <h3>Call Outs:</h3>
+        <ul>
+          <li v-for="(entry, index) in entries" :key="index">
+            <span v-if="Array.isArray(entry.callOut)">
+              <strong>{{ entry.name }}:</strong>
+              <ul>
+                <li v-for="(callOutItem, callOutIndex) in entry.callOut" :key="callOutIndex">
+                  {{ callOutItem }}
+                </li>
+              </ul>
+            </span>
+            <span v-else-if="entry.callOut">
+              <strong>{{ entry.name }}:</strong> {{ entry.callOut }}
+            </span>
+          </li>
+        </ul>
+      </div>
 
         <!-- Accordion -->
       <div v-for="(entry, index) in entries" :key="index">
@@ -111,23 +110,28 @@ export default {
           name: "Brad Carletti",
           date: "14/09/2023",
           note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          callOut: "Dev server was crushed.",
+          callOut: [
+            "Dev server was crushed."
+          ],
           callOutDate: "18/09/2023"
         },
         {
           name: "Mirko Dukic",
           date: "14/09/2023",
           note: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-          callOut: "",
+          callOut: [
+            "A critical bug was identified in the latest software release.",
+            "The development team is actively working on a fix and will deploy it ASAP"
+          ],
         },
         {
           name: "Josie Han",
           date: "14/09/2023",
           note: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
           callOut: [
-            "1.Performance issue detected on the live site.",
-            "2.Server downtime reported during peak traffic hours.",
-            "3.Found a critical bug in the production code.",
+            "Performance issue detected on the live site.",
+            "Server downtime reported during peak traffic hours.",
+            "Found a critical bug in the production code.",
           ],
           // callOutDate:"21/09/2023"
         },
@@ -135,25 +139,35 @@ export default {
           name: "Sam Tudman",
           date: "14/09/2023",
           note: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-          callOut: "",
+          callOut: [
+            "Users reported slow performance on our web application. ",
+            "Our performance testing team is analyzing the issue to optimize response times. "
+          ],
         },
         {
           name: "Steven Chen",
           date: "14/09/2023",
           note: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-          callOut: "Security vulnerability identified in user authentication."
+          callOut: [
+            "Security vulnerability identified in user authentication."
+          ],
         },
         {
           name: "Loredana Lo Surdo",
           date: "14/09/2023",
           note: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-          callOut: "Database connection failure in the staging environment."
+          callOut: [
+            "Database connection failure in the staging environment."
+          ]
         },
         {
           name: "Andrew Tieu",
           date: "14/09/2023",
           note: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-          callOut: "UI/UX feedback needed for the upcoming release."
+          callOut: [
+            "A new feature request came in from our customer support team. ",
+            "We need to discuss its feasibility and prioritize it in the backlog."
+          ]
         }
       ]
     };
@@ -242,4 +256,52 @@ h2 {
   overflow: auto;
   background-color: whitesmoke;
 }
+
+.call-outs {
+  margin-top: 20px; /* Add some top margin for separation */
+  border: 1px solid #ccc;
+  padding: 15px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+}
+
+.call-outs h3 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.call-outs ul {
+  list-style: none;
+  padding: 0;
+}
+
+.call-outs li {
+  margin-bottom: 10px;
+}
+
+.call-outs strong {
+  font-weight: bold;
+  color: #007aae;
+}
+
+.call-outs ul li ul {
+  list-style: disc;
+  margin-left: 20px;
+}
+
+.call-outs ul li ul li {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/* Add some spacing and styling to the "Not Call Out" message */
+.call-outs span[style="display: none;"] {
+  font-style: italic;
+  color: #888;
+}
+
+.call-outs span[style="display: none;"]::before {
+  content: "Not Call Out: ";
+}
+
 </style>
